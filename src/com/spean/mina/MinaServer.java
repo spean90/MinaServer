@@ -20,7 +20,7 @@ public class MinaServer {
 			ioAcceptor.getFilterChain().addLast("codes", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("utf-8"))));
 			ioAcceptor.setHandler(new MyMinaHandler());
 			ioAcceptor.getSessionConfig().setReadBufferSize( 2048 );
-			ioAcceptor.getSessionConfig().setIdleTime( IdleStatus.BOTH_IDLE, 10 );
+			ioAcceptor.getSessionConfig().setIdleTime( IdleStatus.BOTH_IDLE, 10 );  //设置客户端10秒后没有读写操作就标记为空闲状态
 			ioAcceptor.bind(new InetSocketAddress(9090));
 		} catch (IOException e) {
 			e.printStackTrace();

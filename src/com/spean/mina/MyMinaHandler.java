@@ -26,7 +26,7 @@ public class MyMinaHandler extends IoHandlerAdapter{
 		}
 		Date date = new Date();
 		session.write(date.toString());
-		System.out.println("message written....");
+		System.out.println("message written...."+str);
 	}
 
 	@Override
