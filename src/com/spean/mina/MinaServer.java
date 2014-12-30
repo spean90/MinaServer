@@ -17,10 +17,12 @@ public class MinaServer {
 		IoAcceptor ioAcceptor = new NioSocketAcceptor();
 		try {
 			ioAcceptor.getFilterChain().addLast("logger", new LoggingFilter());
-			ioAcceptor.getFilterChain().addLast("codes", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("utf-8"))));
+			//ioAcceptor.getFilterChain().addLast("codes", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("utf-8"))));
+			//自定义codecFactory;
+			ioAcceptor.getFilterChain().addLast("codes", new ProtocolCodecFilter(new MyCodecFactory()));
 			ioAcceptor.setHandler(new MyMinaHandler());
 			ioAcceptor.getSessionConfig().setReadBufferSize( 2048 );
-			ioAcceptor.getSessionConfig().setIdleTime( IdleStatus.BOTH_IDLE, 10 );  //设置客户端10秒后没有读写操作就标记为空闲状态
+			//ioAcceptor.getSessionConfig().setIdleTime( IdleStatus.BOTH_IDLE, 10 );  //设置客户端10秒后没有读写操作就标记为空闲状态
 			ioAcceptor.bind(new InetSocketAddress(9090));
 		} catch (IOException e) {
 			e.printStackTrace();
